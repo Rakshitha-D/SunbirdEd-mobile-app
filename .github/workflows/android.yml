@@ -82,6 +82,7 @@ jobs:
     - name: Replace secrets in gradle.properties
       run: |
         sed -i 's|^base_url=.*|base_url=${{ secrets.BASE_URL }}|' android/gradle.properties
+        sed -i 's|^channel_id=.*|channel_id=${{ secrets.CHANNEL_ID }}|' android/gradle.properties
         sed -i 's|^mobile_app_key=.*|mobile_app_key=${{ secrets.MOBILE_APP_KEY }}|' android/gradle.properties
         sed -i 's|^mobile_app_secret=.*|mobile_app_secret=${{ secrets.MOBILE_APP_SECRET }}|' android/gradle.properties
 
