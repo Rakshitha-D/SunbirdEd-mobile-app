@@ -50,9 +50,6 @@ jobs:
     - name: List contents of configurations folder
       run: ls /home/runner/work/SunbirdEd-mobile-app/SunbirdEd-mobile-app/configurations/
 
-    - name: Display google-services.json content
-      run: cat /home/runner/work/SunbirdEd-mobile-app/SunbirdEd-mobile-app/configurations/google-services.json
-
     - name: Decode env file
       id: decode_env
       uses: timheuer/base64-to-file@v1.2
