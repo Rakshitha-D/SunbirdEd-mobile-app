@@ -61,6 +61,12 @@ jobs:
     - name: Copy google-services.json android app
       run: cp configurations/google-services.json android/app/google-services.json
 
+    - name: Fix missing resources in capacitor-cordova-android-plugins
+      run: |
+        echo "Copying resources to capacitor-cordova-android-plugins..."
+        mkdir -p android/capacitor-cordova-android-plugins/src/main/res
+        cp -r android/app/src/main/res/* android/capacitor-cordova-android-plugins/src/main/res/
+
     - name: Build Ionic assets
       run: ionic build --prod && npx cap sync
 
@@ -113,11 +119,7 @@ jobs:
     #     path: ${{ github.workspace }}/android/app/build/outputs/
     # ... keep everything above as-is
 
-    - name: Fix missing resources in capacitor-cordova-android-plugins
-      run: |
-        echo "Copying resources to capacitor-cordova-android-plugins..."
-        mkdir -p android/capacitor-cordova-android-plugins/src/main/res
-        cp -r android/app/src/main/res/* android/capacitor-cordova-android-plugins/src/main/res/
+   
 
     - name: Build debug APK
       run: cd android && ./gradlew assembleDebug
