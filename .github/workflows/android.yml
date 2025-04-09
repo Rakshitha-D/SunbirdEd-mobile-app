@@ -62,7 +62,10 @@ jobs:
       run: cp configurations/google-services.json android/app/google-services.json
 
     - name: Build Ionic assets
-      run: ionic build --prod && npx cap sync
+      run: |
+        ionic build --prod && npx cap sync
+        npx cap copy android && npx cap update android
+        cd android && ./gradlew assembleDebug && cd ..
 
     - name: Copy google-services.json to capacitor-cordova-android-plugins
       run: cp configurations/google-services.json android/capacitor-cordova-android-plugins/google-services.json
