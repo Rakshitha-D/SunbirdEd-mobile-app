@@ -1,23 +1,28 @@
 const fs = require('fs');
 const path = require('path');
 
-// Paths
-const googleServicesBase = '../configurations/google-services.json';
-const googleServicesCap = 'android/capacitor-cordova-android-plugins/google-services.json';
+// =================================google-services.json=================================================== //
+if (process.argv[2] === 'android') {
+	const googleServicesBase = 'configurations/google-services.json';
+	const googleServicesCap = ['android/app/google-services.json', 'android/capacitor-cordova-android-plugins/google-services.json'];
+  
+    // google-service fix
+    googleServicesCap.forEach(capService => {
+        fs.copyFile(googleServicesBase, capService, (err) => {
+            if (err) {
+                console.error(err);
+            }
+        });
+    });
 
-// Check if the destination directory exists
-const dir = path.dirname(googleServicesCap);
-
-// If the directory does not exist, log an error
-if (!fs.existsSync(dir)) {
-    console.error(`Directory does not exist: ${dir}`);
-} else {
-    // Proceed with copying the file if the directory exists
-    fs.copyFile(googleServicesBase, googleServicesCap, (err) => {
+    // Printing the contents of the android folder
+    const androidDir = 'android';
+    
+    fs.readdir(androidDir, (err, files) => {
         if (err) {
-            console.error('Error copying file:', err);
+            console.error('Error reading android directory:', err);
         } else {
-            console.log('google-services.json copied successfully.');
+            console.log('Contents of android folder:', files);
         }
     });
 }
