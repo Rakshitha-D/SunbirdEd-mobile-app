@@ -119,6 +119,9 @@ jobs:
         mkdir -p android/capacitor-cordova-android-plugins/src/main/res
         cp -r android/app/src/main/res/* android/capacitor-cordova-android-plugins/src/main/res/
 
+    - name: copy adn update android
+      run: npx cap copy android && npx cap update android
+
     - name: Build debug APK
       run: cd android && ./gradlew assembleDebug
 
