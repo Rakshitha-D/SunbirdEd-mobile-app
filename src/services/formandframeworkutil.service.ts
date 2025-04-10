@@ -660,11 +660,14 @@ export class FormAndFrameworkUtilService {
 
     async getFormFields(formRequest: FormRequest, rootOrgId?: string) {
         formRequest.rootOrgId = rootOrgId || '*';
+        console.log('formRequest', formRequest)
         try {
             const formData = await this.formService.getForm(formRequest).toPromise() as any;
+            console.log('formData', formData)
             const fields = formData?.form?.data?.fields || [];
             return fields;
         } catch (error) {
+            console.error('error while fetching form fields ', error);
             throw error;
         }
     }
