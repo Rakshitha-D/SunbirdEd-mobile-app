@@ -448,6 +448,18 @@ export const sunbirdSdkFactory =
         }
       });
 
+      // Verify initialization
+      if (!SunbirdSdk.instance.isInitialized()) {
+        throw new Error('SDK initialization failed');
+      }
+
+      // Verify form service
+      if (!SunbirdSdk.instance.formService) {
+        throw new Error('Form service not initialized');
+      }
+
+      console.log('SDK initialized successfully');
+
       window['sunbird'] = SunbirdSdk.instance;
     };
   };

@@ -83,12 +83,12 @@ jobs:
         echo "KEYSTORE_ALIAS=${{ secrets.SIGNING_KEY_ALIAS }}" >> ${{ github.workspace }}/android/signing.properties
         echo "KEYSTORE_ALIAS_PASSWORD=${{ secrets.SIGNING_KEY_PASSWORD }}" >> ${{ github.workspace }}/android/signing.properties
 
-    # - name: Replace secrets in gradle.properties
-    #   run: |
-    #     sed -i 's|^base_url=.*|base_url=${{ secrets.BASE_URL }}|' android/gradle.properties
-    #     sed -i 's|^channel_id=.*|channel_id=${{ secrets.CHANNEL_ID }}|' android/gradle.properties
-    #     sed -i 's|^mobile_app_key=.*|mobile_app_key=${{ secrets.MOBILE_APP_KEY }}|' android/gradle.properties
-    #     sed -i 's|^mobile_app_secret=.*|mobile_app_secret=${{ secrets.MOBILE_APP_SECRET }}|' android/gradle.properties
+    - name: Replace secrets in gradle.properties
+      run: |
+        sed -i 's|^base_url=.*|base_url=${{ secrets.BASE_URL }}|' android/gradle.properties
+        sed -i 's|^channel_id=.*|channel_id=${{ secrets.CHANNEL_ID }}|' android/gradle.properties
+        sed -i 's|^mobile_app_key=.*|mobile_app_key=${{ secrets.MOBILE_APP_KEY }}|' android/gradle.properties
+        sed -i 's|^mobile_app_secret=.*|mobile_app_secret=${{ secrets.MOBILE_APP_SECRET }}|' android/gradle.properties
 
 
     - name: Show gradle.properties content
