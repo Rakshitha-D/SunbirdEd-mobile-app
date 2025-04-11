@@ -449,7 +449,7 @@ export const sunbirdSdkFactory =
       });
 
       // Verify initialization
-      if (!SunbirdSdk.instance.isInitialized()) {
+      if (!SunbirdSdk.instance.isInitialised) {
         throw new Error('SDK initialization failed');
       }
 
