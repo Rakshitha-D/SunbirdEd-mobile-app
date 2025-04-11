@@ -85,7 +85,7 @@ jobs:
 
     - name: Replace base_url in gradle.properties
       run: |
-        BASE_URL=$(echo "${{ secrets.BASE_URL }}" | base64 --decode)
+        BASE_URL=$(echo "${{ secrets.BASE_URL }}")
         echo "Decoded URL has $(echo "$BASE_URL" | wc -c) characters"
         sed -i "s|^base_url=.*|base_url=$BASE_URL|" android/gradle.properties
 
