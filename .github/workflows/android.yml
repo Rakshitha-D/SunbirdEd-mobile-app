@@ -83,11 +83,6 @@ jobs:
         echo "KEYSTORE_ALIAS=${{ secrets.SIGNING_KEY_ALIAS }}" >> ${{ github.workspace }}/android/signing.properties
         echo "KEYSTORE_ALIAS_PASSWORD=${{ secrets.SIGNING_KEY_PASSWORD }}" >> ${{ github.workspace }}/android/signing.properties
 
-    - name: base_url in gradle.properties
-      run: |
-        BASE_URL=$(echo "${{ secrets.BASE_URL }}")
-        echo "Decoded URL has $(echo "$BASE_URL" | wc -c) characters"
-
     - name: Replace secrets in gradle.properties
       run: |
         sed -i 's|^base_url=.*|base_url=${{ secrets.BASE_URL }}|' android/gradle.properties
