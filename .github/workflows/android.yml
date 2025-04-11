@@ -58,14 +58,8 @@ jobs:
         fileDir: '/home/runner/work/SunbirdEd-mobile-app/SunbirdEd-mobile-app/configurations/'
         encodedString: ${{ secrets.ENV }}
 
-    - name: Copy google-services.json android app
-      run: cp configurations/google-services.json android/app/google-services.json
-
     - name: Build Ionic assets
       run: ionic build --prod && npx cap sync
-
-    - name: Copy google-services.json to capacitor-cordova-android-plugins
-      run: cp configurations/google-services.json android/capacitor-cordova-android-plugins/google-services.json
 
     - name: Decode Keystore
       id: decode_keystore
