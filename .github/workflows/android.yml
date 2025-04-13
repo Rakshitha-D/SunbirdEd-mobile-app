@@ -116,16 +116,31 @@ jobs:
     - name: copy and update android
       run: npx cap copy android && npx cap update android
 
+    - name: list android files
+      run: |
+        ls -R android/app/src/main/assets/public/content-player
+        ls -R android/capacitor-cordova-android-plugins/src/main/assets/public/content-player
+
+
     - name: Copy content-player files to Android assets
       run: |
-        SOURCE_DIR="www/content-player/"
-        TARGET_DIR="android/app/src/main/assets/public/content-player/"
 
-        mkdir -p "$TARGET_DIR"
+        if [ ! -d "www/content-player" ]; then
+          echo "❌ Source directory www/content-player does not exist!"
+          exit 1
+        fi
 
-        echo "Copying content from $SOURCE_DIR to $TARGET_DIR"
-        cp -r "$SOURCE_DIR"* "$TARGET_DIR"
+        # Create necessary directories
+        mkdir -p android/app/src/main/assets/public/content-player
+        mkdir -p android/capacitor-cordova-android-plugins/src/main/assets/public/content-player
 
+        # Copy content player files
+        cp -r www/content-player/* android/app/src/main/assets/public/content-player/
+        cp -r www/content-player/* android/capacitor-cordova-android-plugins/src/main/assets/public/content-player/
+
+        # Verify files were copied
+        ls -R android/app/src/main/assets/public/content-player
+        ls -R android/capacitor-cordova-android-plugins/src/main/assets/public/content-player
 
     - name: Build debug APK
       run: cd android && ./gradlew assembleDebug
@@ -156,4 +171,3 @@ jobs:
     #     name: android-apks
     #     path: |
     #       android/app/build/outputs/apk/release/app-release.apk
-
