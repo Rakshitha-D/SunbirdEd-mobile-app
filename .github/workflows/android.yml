@@ -58,6 +58,14 @@ jobs:
         fileDir: '/home/runner/work/SunbirdEd-mobile-app/SunbirdEd-mobile-app/configurations/'
         encodedString: ${{ secrets.ENV }}
 
+    - name: Decode env file
+      id: decode_env
+      uses: timheuer/base64-to-file@v1.2
+      with:
+        fileName: 'configuration.prod.ts'
+        fileDir: '/home/runner/work/SunbirdEd-mobile-app/SunbirdEd-mobile-app/configurations/'
+        encodedString: ${{ secrets.ENV }}
+
     - name: Build Ionic assets
       run: ionic build --prod && npx cap sync
 
@@ -113,8 +121,19 @@ jobs:
         mkdir -p android/capacitor-cordova-android-plugins/src/main/res
         cp -r android/app/src/main/res/* android/capacitor-cordova-android-plugins/src/main/res/
 
-    - name: copy adn update android
+    - name: copy and update android
       run: npx cap copy android && npx cap update android
+
+    - name: Copy content-player files to Android assets
+      run: |
+        SOURCE_DIR="www/content-player/"
+        TARGET_DIR="android/app/src/main/assets/public/content-player/"
+
+        mkdir -p "$TARGET_DIR"
+
+        echo "Copying content from $SOURCE_DIR to $TARGET_DIR"
+        cp -r "$SOURCE_DIR"* "$TARGET_DIR"
+
 
     - name: Build debug APK
       run: cd android && ./gradlew assembleDebug
