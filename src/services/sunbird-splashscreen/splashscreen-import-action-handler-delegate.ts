@@ -43,6 +43,9 @@ export class SplashscreenImportActionHandlerDelegate implements SplashscreenActi
     const filePath = 'file://' + payload.filePath;
     const fileExtenstion = filePath.split('.').pop();
 
+    console.log('filePath', filePath)
+    console.log('fileExtenstion', fileExtenstion);
+
     switch (fileExtenstion) {
       case 'ecar': {
         defer(async () => {
