@@ -100,6 +100,13 @@ jobs:
         mkdir -p android/capacitor-cordova-android-plugins/src/main/res
         cp -r android/app/src/main/res/* android/capacitor-cordova-android-plugins/src/main/res/
 
+
+    - name: Capacitor Sync
+      run: npx cap sync android
+
+    - name: copy and update android
+      run: npx cap copy android && npx cap update android
+
     - name: list android files
       run: |
         ls -R android/app/src/main/assets/public/content-player
@@ -120,12 +127,6 @@ jobs:
 
         # Verify files were copied
         ls -R android/app/src/main/assets/public/content-player
-
-    - name: Capacitor Sync and Copy
-      run: npx cap sync && npx cap copy android
-
-    - name: copy and update android
-      run: npx cap copy android && npx cap update android
 
     - name: Build debug APK
       run: cd android && ./gradlew assembleDebug
