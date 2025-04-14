@@ -33,6 +33,12 @@ jobs:
     - name: Install app dependencies
       run: npm install --legacy-peer-deps
 
+    - name: Upload App Icon
+      run: node scripts/uploadAppIcon.js
+
+    - name: Generate App Assets
+      run: npx @capacitor/assets generate --iconBackgroundColor '#ffffff' --iconBackgroundColorDark '#222222' --splashBackgroundColor '#ffffff' --splashBackgroundColorDark '#111111'
+
     - name: Convert Windows line endings to Linux from the gradlew file
       run: sudo apt update && sudo apt install dos2unix && cd android && dos2unix ./gradlew && cd ..
 
@@ -88,25 +94,6 @@ jobs:
     - name: Show gradle.properties content
       run: cat android/gradle.properties
 
-
-    # - name: Build bundle
-    #   run: cd android && ./gradlew app:bundleRelease
-    #   env:
-    #     SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
-    #     SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
-    #     SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
-
-
-    # # - name: Build APK
-    # #   run: cd android && ./gradlew assembleDebug
-
-    # - name: Upload APK
-    #   uses: actions/upload-artifact@v4
-    #   with:
-    #     name: app-release
-    #     path: ${{ github.workspace }}/android/app/build/outputs/
-    # ... keep everything above as-is
-
     - name: Fix missing resources in capacitor-cordova-android-plugins
       run: |
         echo "Copying resources to capacitor-cordova-android-plugins..."
@@ -149,20 +136,3 @@ jobs:
       with:
         name: debug-apk
         path: android/app/build/outputs/
-
-
-    # - name: Fix missing resources in capacitor-cordova-android-plugins
-    #   run: |
-    #     echo "Copying resources to capacitor-cordova-android-plugins..."
-    #     mkdir -p android/capacitor-cordova-android-plugins/src/main/res
-    #     cp -r android/app/src/main/res/* android/capacitor-cordova-android-plugins/src/main/res/
-
-    # - name: Build release APK
-    #   run: cd android && ./gradlew assembleRelease
-
-    # - name: Upload APKs
-    #   uses: actions/upload-artifact@v4
-    #   with:
-    #     name: android-apks
-    #     path: |
-    #       android/app/build/outputs/apk/release/app-release.apk
