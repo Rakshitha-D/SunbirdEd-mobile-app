@@ -16,7 +16,6 @@
     "capacitor:sync:after": "node scripts/copyGoogleServiceFile.js android && node scripts/configureGradleFiles.js android && node scripts/application/add_application.js android",
     "capacitor:sync:before": "node scripts/copyContentPlayer.js android",
     "capacitor:update:after": "node scripts/configureGradleFiles.js && node scripts/copyGoogleServiceFile.js android && node scripts/copyContentPlayer.js android",
-    "capacitor:update:before": "node scripts/copyGoogleServiceFile.js android && node scripts/configureGradleFiles.js",
     "ionic-build": "ng build && NODE_ENV=staging ionic cap run android --source-map=true --target emulator-5554 --info",
     "ionic-build:prod": "ng build && NODE_ENV=production ionic cap run android --prod --release --verbose --buildConfig ./buildConfig/build.json",
     "ionic-build:debug": "ng build && cordova build android --debug --buildConfig ./buildConfig/build.json",
@@ -81,11 +80,11 @@
     "@project-sunbird/sb-dashlet": "8.0.1",
     "@project-sunbird/sb-notification": "8.0.0",
     "@project-sunbird/sb-styles": "0.0.16",
-    "@project-sunbird/sb-svg2pdf": "8.0.3",
+    "@project-sunbird/sb-svg2pdf": "8.0.5",
     "@project-sunbird/sunbird-epub-player-web-component": "1.4.1",
     "@project-sunbird/sunbird-pdf-player-web-component": "1.1.0",
     "@project-sunbird/sunbird-quml-player-web-component": "3.0.3",
-    "@project-sunbird/sunbird-sdk": "7.6.0",
+    "@project-sunbird/sunbird-sdk": "7.6.1",
     "@project-sunbird/sunbird-video-player-web-component": "^1.0.1",
     "chart.js": "4.1.1",
     "chartjs-plugin-datalabels": "2.2.0",
@@ -105,6 +104,7 @@
     "epubjs": "0.3.93",
     "grapheme-splitter": "1.0.4",
     "hammerjs": "2.0.8",
+    "html-to-image": "^1.11.13",
     "ionic4-rating": "1.0.9",
     "jest-preset-angular": "13.1.4",
     "jspdf": "2.5.1",
@@ -210,7 +210,7 @@
     "tiny-glob": "0.2.9",
     "ts-node": "10.9.1",
     "tslint": "6.1.0",
-    "typescript": "5.7.3"
+    "typescript": "^5.7.3"
   },
   "description": "An Ionic project",
   "jest": {

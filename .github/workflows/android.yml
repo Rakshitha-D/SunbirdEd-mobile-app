@@ -94,12 +94,6 @@ jobs:
     - name: Show gradle.properties content
       run: cat android/gradle.properties
 
-    # - name: Fix missing resources in capacitor-cordova-android-plugins
-    #   run: |
-    #     echo "Copying resources to capacitor-cordova-android-plugins..."
-    #     mkdir -p android/capacitor-cordova-android-plugins/src/main/res
-    #     cp -r android/app/src/main/res/* android/capacitor-cordova-android-plugins/src/main/res/
-
     - name: Capacitor Sync
       run: npx cap sync android
 
