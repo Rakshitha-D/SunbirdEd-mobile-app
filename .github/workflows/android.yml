@@ -21,13 +21,11 @@ jobs:
     
     - name: Setup Android SDK
       uses: android-actions/setup-android@v2
-      with:
-        sdk-platform: "android-33"
     
     - name: Install specific platform and build tools
       run: |
-        echo "y" | $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager --install "platforms;android-33" 
-        echo "y" | $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager --install "build-tools;33.0.0"
+        echo "y" | $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager --install "platforms;android-35" 
+        echo "y" | $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager --install "build-tools;34.0.0"
         echo "y" | $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager --licenses
 
     - name: Check Android SDK versions
@@ -44,7 +42,7 @@ jobs:
     - name: Install Node.js
       uses: actions/setup-node@v1
       with:
-        node-version: 22.x
+        node-version: 22.8.0
 
     - name: Install Ionic
       run: npm install -g @ionic/cli
