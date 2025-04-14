@@ -18,7 +18,26 @@ jobs:
         java-version: '21'
         distribution: 'zulu'
         cache: gradle
-        
+    
+    - name: Setup Android SDK
+      uses: android-actions/setup-android@v2
+      with:
+        sdk-platform: "android-35"
+    
+    - name: Install specific platform and build tools
+      run: |
+        echo "y" | $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager --install "platforms;android-35" 
+        echo "y" | $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager --install "build-tools;34.0.0"
+        echo "y" | $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager --licenses
+
+    - name: Check Android SDK versions
+      run: |
+        echo "ANDROID_HOME: $ANDROID_HOME"
+        echo "Available Android platforms:"
+        ls -la $ANDROID_SDK_ROOT/platforms/
+        echo "Available build tools:"
+        ls -la $ANDROID_SDK_ROOT/build-tools/
+
     - name: Setup Gradle
       uses: gradle/gradle-build-action@v2
       
