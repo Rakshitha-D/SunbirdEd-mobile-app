@@ -28,7 +28,7 @@ jobs:
         node-version: 22.x
 
     - name: Install Ionic
-      run: npm install -g @ionic/cli
+      run: npm install -g @ionic/cli --legacy-peer-deps
 
     - name: Install app dependencies
       run: npm install --legacy-peer-deps
@@ -72,7 +72,7 @@ jobs:
         sed -i 's|^mobile_app_secret=.*|mobile_app_secret=${{ secrets.MOBILE_APP_SECRET }}|' android/gradle.properties
 
     - name: Build Ionic assets
-      run: ionic build --prod && npx cap sync
+      run: ionic build --prod
 
     # - name: Decode Keystore
     #   id: decode_keystore
@@ -100,9 +100,6 @@ jobs:
         mkdir -p android/capacitor-cordova-android-plugins/src/main/res
         cp -r android/app/src/main/res/* android/capacitor-cordova-android-plugins/src/main/res/
 
-    - name: copy and update android
-      run: npx cap copy android && npx cap update android
-
     - name: list android files
       run: |
         ls -R android/app/src/main/assets/public/content-player
@@ -123,6 +120,12 @@ jobs:
 
         # Verify files were copied
         ls -R android/app/src/main/assets/public/content-player
+
+    - name: Capacitor Sync and Copy
+      run: npx cap sync && npx cap copy android
+
+    - name: copy and update android
+      run: npx cap copy android && npx cap update android
 
     - name: Build debug APK
       run: cd android && ./gradlew assembleDebug
